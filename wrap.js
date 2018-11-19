@@ -1,12 +1,31 @@
 const wrap = (line, maxLen) => {
+
+  let finalStr = '';
+
   if (line.length <= maxLen) {
     return line;
   } else {
-    // use % operator to calculate number of lines (line.length % maxLen)
-    // for each line, find place to insert line break using maxLen
-    // if place to insert is a space, add line break and go to next line
-    // if its not a space, find closest space (at a smaller index and insert line break there)
-    const placeToInsertLineBreak = line.indexOf(maxLen);
+
+    const numLines = Math.floor(line.length/maxLen);
+
+    for (let i = 0; i < numLines; i++) {
+
+      const placeToInsertLineBreak = line.charAt((i+1)*maxLen-1);
+
+
+      if (i === numLines-1) {
+        finalStr += line.substring((i*maxLen));
+        break;
+      }
+
+      if (placeToInsertLineBreak === ' ') {
+        finalStr += line.substring((i*maxLen), line.indexOf(placeToInsertLineBreak) + 1);
+      } else {
+        const indexOfLastSpace = line.substring((i*maxLen), line.indexOf(placeToInsertLineBreak) + 1).lastIndexOf(' ');
+      }
+      finalStr += '\n';
+    }
+    return finalStr;
   }
 };
 

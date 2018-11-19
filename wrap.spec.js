@@ -9,6 +9,9 @@ describe('wrap', () => {
     expect(wrap('short input string', 20)).to.equal('short input string');
     expect(wrap('longer input string!', 20)).to.equal('longer input string!');
   });
+  it('Inserts line breaks in the right places if they fall at word breaks', () => {
+    expect(wrap('aa aa ', 3)).to.equal('aa \naa ');
+  });
   it('Inserts line breaks in the right places', () => {
     expect(
       wrap(
